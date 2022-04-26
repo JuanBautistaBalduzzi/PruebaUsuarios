@@ -28,8 +28,8 @@ public class UserValidation {
     if(!registroDeUsuarios.exists())
       throw new NullPointerException("El Registro de Usuarios no Existe");
     verificarUsuarioDisponible(usuario);
-    BufferedWriter registoParaEscribir = new BufferedWriter(new FileWriter("./RegistroUsuarios.txt"));
-    registoParaEscribir.write(usuario+": "+ (sha256Hex(contrasena)));
+    BufferedWriter registoParaEscribir = new BufferedWriter(new FileWriter(registroDeUsuarios.getAbsoluteFile(),true));
+    registoParaEscribir.write(usuario+": "+ sha256Hex(contrasena)+"\n");
     registoParaEscribir.close();
     System.out.println(sha256Hex(contrasena));
   }
@@ -55,7 +55,7 @@ public class UserValidation {
     return false;
   }
   public static void main(String[] args) throws Exception {
-    guardarUsuario("admin","forrosdemierda");
+    guardarUsuario("admin","grupo*deRetardos");
     boolean a=validarUsuario("admin","grupo*deRetardos");
     System.out.println(a);
   }
